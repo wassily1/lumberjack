@@ -161,12 +161,12 @@ func (l *Logger) Write(p []byte) (n int, err error) {
 	now:=time.Now()
 	
 	if now.After(nextbreak){
-		if err := l.rotate(); err != nil {
-			return 0, err
-		}
 		currentTime1=time.Now()
 		next = currentTime1.Add(time.Hour * 24)
 		nextbreak = time.Date(next.Year(), next.Month(), next.Day(), 0, 0, 0, 0, next.Location())
+		if err := l.rotate(); err != nil {
+			return 0, err
+		}
 	}
 	
 	n, err = l.file.Write(p)
