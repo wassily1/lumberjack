@@ -150,6 +150,7 @@ func (l *Logger) Write(p []byte) (n int, err error) {
 	}
 
 	if l.size+writeLen > l.max() {
+		println('++++++++++++++++++++++++++++++')
 		if err := l.rotate(); err != nil {
 			return 0, err
 		}
@@ -161,6 +162,7 @@ func (l *Logger) Write(p []byte) (n int, err error) {
         next = time.Date(next.Year(), next.Month(), next.Day(), 0, 0, 0, 0, next.Location()) //获取下一个凌晨的日期
         t := time.NewTimer(next.Sub(now))//计算当前时间到凌晨的时间间隔，设置一个定时器
         <-t.C
+	println('------------------------------------')
 	if err := l.rotate(); err != nil {
 			return 0, err
 		}
