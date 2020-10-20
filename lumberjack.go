@@ -133,31 +133,31 @@ var (
 // current time, and a new log file is created using the original log file name.
 // If the length of the write is greater than MaxSize, an error is returned.
 func (l *Logger) Write(p []byte) (n int, err error) {
-	l.mu.Lock()
-	defer l.mu.Unlock()
+// 	l.mu.Lock()
+// 	defer l.mu.Unlock()
 
-	println("rotate rotate")
-	print("rotate rotate")
+// 	println("rotate rotate")
+// 	print("rotate rotate")
 	
-	writeLen := int64(len(p))
-	if writeLen > l.max() {
-		return 0, fmt.Errorf(
-			"write length %d exceeds maximum file size %d", writeLen, l.max(),
-		)
-	}
+// 	writeLen := int64(len(p))
+// 	if writeLen > l.max() {
+// 		return 0, fmt.Errorf(
+// 			"write length %d exceeds maximum file size %d", writeLen, l.max(),
+// 		)
+// 	}
 
-	if l.file == nil {
-		if err = l.openExistingOrNew(len(p)); err != nil {
-			return 0, err
-		}
-	}
+// 	if l.file == nil {
+// 		if err = l.openExistingOrNew(len(p)); err != nil {
+// 			return 0, err
+// 		}
+// 	}
 
-	if l.size+writeLen > l.max() {
-		println("rotate max")
-		if err := l.rotate(); err != nil {
-			return 0, err
-		}
-	}
+// 	if l.size+writeLen > l.max() {
+// 		println("rotate max")
+// 		if err := l.rotate(); err != nil {
+// 			return 0, err
+// 		}
+// 	}
 
 	//wassily添加的：
 	now := time.Now()  //获取当前时间，放到now里面，要给next用  
